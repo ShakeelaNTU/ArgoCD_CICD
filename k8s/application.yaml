@@ -1,0 +1,19 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: shakee-app
+spec:
+  project: default
+  source:
+    repoURL: "https://github.com/ShakeelaNTU/ArgoCD_CICD.git"
+    targetRevision: main
+    path: k8s  
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: shakee-ns
+  syncPolicy:
+    syncOptions:
+    - CreateNamespace=true
+    automated:
+      prune: true
+      selfHeal: true
